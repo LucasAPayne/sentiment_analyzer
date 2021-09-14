@@ -5,7 +5,7 @@ This project uses [Graph4NLP](https://github.com/graph4ai/graph4nlp) to construc
 ### Installation
 First, navigate to the desired folder on your system and recursively clone the repository along with its submodules:
 
-    git clone -r https://github.com/LucasAPayne/sentiment_analyzer.git
+    git clone --recursive https://github.com/LucasAPayne/sentiment_analyzer.git
 
 It is recommended to use [Anaconda](https://www.anaconda.com/products/individual) to manage virtual environments. In an Anaconda command prompt, create and activate an environment for this project, and install its dependencies:
 
