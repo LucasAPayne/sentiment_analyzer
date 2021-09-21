@@ -56,8 +56,8 @@ patience: 10
 lr: 0.001 # learning rate
 lr_patience: 2
 lr_reduce_factor: 0.5
-num_workers: 8 # number of data loader workers
+num_workers: 2 # number of data loader workers
 
 
-gpu: 0
+gpu: -1
 no_cuda: false
