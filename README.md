@@ -30,5 +30,20 @@ If no processed data is available (if there is no `data/processed` directory fro
 
 Now, the code should be ready to run from JupyterLab.
 
-## Additional Notes
-By default, this project uses the CPU-only version of PyTorch and DGL. However, if you have an NVIDIA graphics card in your machine, you can install the versions of PyTorch and DGL that match your CUDA version in order to run the model on your GPU.
+### Running on a GPU
+By default, this project uses the CPU-only version of PyTorch and DGL. However, if you have an NVIDIA GPU and would like to train this model on it, all you need to do is install the versions of [PyTorch](https://pytorch.org/get-started/locally/) and [DGL](https://www.dgl.ai/pages/start.html) that correspond to your CUDA version.
+
+## Results
+| Dataset         | GNN Model | Graph Construction            | Accuracy |
+| ---             | :---:     | :---:                         | :---:    |
+| IMDb            | GraphSAGE | Constituency <br/> Dependency | 83.1% <br/> 82.9% |
+| Rotten Tomatoes | GraphSAGE | Constituency <br/> Dependency | 69.5% <br/> 62.2% |
+
+## Notes
+### Datasets
+The IMDb dataset used is a trimmed-down version of the one provided in the [torchtext](https://pytorch.org/text/stable/index.html) library. The original version contains 25,000 reviews in the train set and 25,000 reviews in the test set. This version keeps only 5,000 reviews from the train set and 2,000 reviews from the test set (1,000 of those reviews are used for this project's test set, and the other 1,000 are used for the validation set). Additionally, each review was cut off after the first period after 500 characters (to limit each review to roughly 100 words). This cut was made because of performance issues encountered with StanfordCoreNLP.
+
+The Rotten Tomatoes dataset was originally developed to test the model in a real-world environment. The idea was for the model to evaluate all of the available reviews for a film and calculate its freshness score. However, the model was also trained on this dataset, where a subset of the audience reviews were used for training, and the full set of critic reviews were used for testing and validation. This dataset leads to severe overfitting, which is likely due to the low number of data points, the differences between audience and critic reviews, and the fact that all reviews concern the same film.
+
+### StanfordCoreNLP Performance Issues
+As mentioned above, the IMDb dataset was drastically reduced in this project due to limitations of StanfordCoreNLP. When attempting to process the entire dataset, StanfordCoreNLP would throw an OutOfMemoryError. This would occur no matter the amount of memory given to the process (it was attempted with 4GB, 8GB, and even 16GB of memory). Occasionally, this error would not be thrown, and the process would hang. It could be terminated and resumed to carry on processing. Completing the processing of the entire dataset in this way took several hours. However, reducing the size of the dataset to 7,000 total reviews and limiting the length of each one allowed StanfordCoreNLP to process the data without issues. The accuracy of the model would likely increase if the entire dataset could be efficiently processed.
