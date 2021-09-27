@@ -2,7 +2,7 @@
 dataset: 'imdb' # dataset to train the model ('rotten_tomatoes', 'imdb')
 val_split_ratio: 0.2 # validation set split ratio (default: 0.2)
 pretrained_word_emb_name: '840B'
-out_dir: '../../out/rotten_tomatoes/graphsage_bi_fuse_constituency_ckpt'
+out_dir: '../../out/imdb/graphsage_bi_fuse_constituency_ckpt'
 
 
 # Graph construction
