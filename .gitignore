@@ -1,4 +1,4 @@
 .ipynb_checkpoints
 .vector_cache
-data/
+data/imdb/processed
 out/
